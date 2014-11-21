@@ -29,11 +29,11 @@ $("#button_get_reposlistado").click(function(e) {
 
 $("#button_get_reposnext").click(function(e) {
 	e.preventDefault();
-	getReposnext();
+	getReposnext(NUMERODEPAGINA=NUMERODEPAGINA+1);
 })
 $("#button_get_reposprev").click(function(e) {
 	e.preventDefault();
-	getReposprev();
+	getReposprev(NUMERODEPAGINA=NUMERODEPAGINA-1);
 })
 
 $("#button_delete_repo").click(function(e) {
@@ -193,7 +193,7 @@ function getReposlistado() {
 					document.getElementById("button_get_reposnext").style.display = "block";
 					
 				});
-				NUMERODEPAGINA++;
+				//NUMERODEPAGINA++;
 								
 	}).fail(function() {
 	document.getElementById("Columna1").style.display = "none";
@@ -209,10 +209,10 @@ function getReposlistado() {
 }
 
 
-function getReposnext(){
-	var url = API_BASE_URL + '/users/' + USERNAME + '/repos?page='+NUMERODEPAGINA +'&per_page=2';
+function getReposnext(nexnumber){
+	var url = API_BASE_URL + '/users/' + USERNAME + '/repos?page='+nexnumber +'&per_page=2';
 	$("#repos_result").text('');
-	$("#numero_de_pagina").text("Página: "+NUMERODEPAGINA);
+	$("#numero_de_pagina").text("Página: "+nexnumber);
 	
 	$.ajax({
 		url : url,
@@ -242,11 +242,12 @@ function getReposnext(){
 				$("#repos_result").text("No  more repositories.");
 				document.getElementById("button_get_reposnext").style.display = "none";
 				document.getElementById("button_get_reposprev").style.display = "block";
-				NUMERODEPAGINA--;
+				//NUMERODEPAGINA--;
 				
 				}
-				else{
-				NUMERODEPAGINA++;
+				else
+				{
+				//NUMERODEPAGINA++;
 				}
 								
 	}).fail(function() {
@@ -254,10 +255,10 @@ function getReposnext(){
 	});
 
 }
-function getReposprev(){
-	var url = API_BASE_URL + '/users/' + USERNAME + '/repos?page='+NUMERODEPAGINA +'&per_page=2';
+function getReposprev(prenumber){
+	var url = API_BASE_URL + '/users/' + USERNAME + '/repos?page='+prenumber +'&per_page=2';
 	$("#repos_result").text('');
-	$("#numero_de_pagina").text("Página: "+NUMERODEPAGINA);
+	$("#numero_de_pagina").text("Página: "+prenumber);
 	
 	$.ajax({
 		url : url,
@@ -286,8 +287,9 @@ function getReposprev(){
 				document.getElementById("button_get_reposprev").style.display = "none";
 				document.getElementById("button_get_reposnext").style.display = "block";
 				}
-				else{
-				NUMERODEPAGINA--;
+				else
+				{
+				//NUMERODEPAGINA--;
 				}
 								
 	}).fail(function() {
